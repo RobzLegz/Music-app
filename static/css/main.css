@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 
-h1{
-    color: red;
+.auth__form{
+    display: flex;
+    background-color: #fff;
 }
