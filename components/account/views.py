@@ -1,17 +1,41 @@
-from flask import Blueprint, render_template, request, flash
+from flask import Blueprint, render_template, request, flash, redirect, session
 import re
 
-from flask.helpers import flash
+from flask.helpers import flash, url_for
 
 account = Blueprint("account", __name__)
 
 
 @account.route("/login", methods=["GET", "POST"])
 def login():
-    if request.method == "GET":
-        print("GET")
-    elif request.method == "POST":
-        print(request.form)
+    error_messages = []
+
+    if request.method == "POST":
+        form_data = request.form
+        email = form_data.get("email")
+        password = form_data.get("password")
+
+        email_err = ""
+        password_err = ""
+
+        emails = re.findall("([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)", email)
+
+        if len(emails) == 0:
+            email_err = "Please provide a valid email"
+            error_messages.append(email_err)
+
+            if len(password) < 6:
+                password_err = "Your password should be at least 6 characters long"
+                error_messages.append(password_err)
+
+        elif len(password) < 6:
+            password_err = "Your password should be at least 6 characters long"
+            error_messages.append(password_err)
+        
+
+        if len(error_messages) > 0:
+            for err in error_messages:
+                flash(err, "danger")
 
     return render_template("login.html")
 
@@ -26,8 +50,6 @@ def register():
         email = form_data.get("email")
         password = form_data.get("password")
         remember_me = form_data.get("remember")
-
-        print(username, email, password, remember_me)
 
         username_err = ""
         email_err = ""
@@ -60,10 +82,18 @@ def register():
 
         if len(error_messages) > 0:
             for err in error_messages:
-                flash(err)
+                flash(err, "danger")
+        else:
+            session["logged_in"] = True
+            return redirect(url_for("home.index"))
 
     return render_template("register.html")
-            
+
+@account.route("/logout", methods=["GET", "POST"])
+def logout():
+    session.clear() 
+
+    return redirect(url_for("account.login"))
         
 
     

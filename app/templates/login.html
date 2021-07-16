@@ -4,6 +4,18 @@
 {% block main %}
 <main>
     <form action="{{ url_for('account.login') }}" method="POST" class="auth__form">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert-message block-message error">
+                <a class="close" href="#">×</a>
+                    <ul>
+                        {% for msg in messages %}
+                            <li>{{ msg }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        {% endwith %}
         <div class="auth__form--group">
             <label for="email">email</label>
             <input type="email" name="email" id="email" placeholder="email">
