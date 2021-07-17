@@ -85,6 +85,7 @@ def register():
                 flash(err, "danger")
         else:
             session["logged_in"] = True
+            session["user_email"] = email
             return redirect(url_for("home.index"))
 
     return render_template("register.html")
