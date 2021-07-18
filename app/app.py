@@ -16,3 +16,9 @@ def register_blueprints(app):
 
     app.register_blueprint(account)
     app.register_blueprint(home)
+
+def register_db_models():
+    from components.music.models import Artist, Album, Song
+    from components.account.models import User
+
+    db.create_tables([Artist, Album, Song, User])
