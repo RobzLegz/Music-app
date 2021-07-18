@@ -1,0 +1,40 @@
+{% extends "admin_base.html" %}
+
+{% block editing %}artist{% endblock %}
+{% block form %}
+<form action="{{ url_for('admin.artists') }}" method="POST">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert-message block-message error">
+            <a class="close" href="#">×</a>
+                <ul>
+                    {% for msg in messages %}
+                        <li>{{ msg }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    {% endwith %}
+    <div class="form__container">
+        <label for="name">name</label>
+        <input type="text" name="name" id="name" placeholder="name" autocomplete="off">
+    </div>
+    <div class="form__container">
+        <label for="about">about</label>
+        <textarea type="text" name="about" id="about" placeholder="about" autocomplete="off"></textarea>
+    </div>
+    <div class="form__container">
+        <label for="image">image</label>
+        <input type="text" name="image" id="image" placeholder="image" autocomplete="off">
+    </div>
+    <div class="form__container">
+        <label for="image">birth date</label>
+        <input type="date" name="birthday" id="birthday" placeholder="birth date" autocomplete="off">
+    </div>
+    <button type="submit">Create</button>
+</form>
+{% endblock %}
+{% block listname %}Artists{% endblock %}
+{% block list %}
+
+{% endblock %}

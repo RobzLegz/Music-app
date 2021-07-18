@@ -13,9 +13,13 @@ db = SqliteDatabase("database.db")
 def register_blueprints(app):
     from components.account.views import account
     from components.home.views import home
+    from components.music.views import music
+    from components.admin.views import admin
 
     app.register_blueprint(account)
     app.register_blueprint(home)
+    app.register_blueprint(music)
+    app.register_blueprint(admin)
 
 def register_db_models():
     from components.music.models import Artist, Album, Song

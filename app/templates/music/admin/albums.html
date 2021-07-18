@@ -1,0 +1,28 @@
+{% extends "admin_base.html" %}
+
+{% block editing %}album{% endblock %}
+{% block form %}
+<form action="">
+    <div class="form__container">
+        <label for="name">name</label>
+        <input type="text" name="name" id="name" placeholder="name" autocomplete="off">
+    </div>
+    <div class="form__container">
+        <label for="about">about</label>
+        <input type="text" name="about" id="about" placeholder="about" autocomplete="off">
+    </div>
+    <div class="form__container">
+        <label for="image">image</label>
+        <input type="text" name="image" id="image" placeholder="image" autocomplete="off">
+    </div>
+    <div class="form__container">
+        <label for="image">birth date</label>
+        <input type="text" name="birthday" id="birthday" placeholder="birth date" autocomplete="off">
+    </div>
+    <button type="submit">Create</button>
+</form>
+{% endblock %}
+{% block listname %}Albums{% endblock %}
+{% block list %}
+
+{% endblock %}
