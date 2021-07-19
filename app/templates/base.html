@@ -8,6 +8,12 @@
     <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" /> -->
 </head>
 <body>
+    <nav>
+        <a href="{{ url_for('music.artists') }}">Artists</a>
+        {% if session.get("is_admin") %}
+            <a href="{{ url_for('admin.artists') }}">Admin</a>
+        {% endif %}
+    </nav>
     {% block main %}
     
     {% endblock %}

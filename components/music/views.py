@@ -6,4 +6,4 @@ music = Blueprint("music", __name__, url_prefix="/music")
 
 @music.route("/artists", methods=["GET", "POST"])
 def artists():
-    return render_template("admin_base.html")
+    return render_template("music/artists.html")

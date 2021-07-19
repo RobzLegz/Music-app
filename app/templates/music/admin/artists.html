@@ -2,7 +2,7 @@
 
 {% block editing %}artist{% endblock %}
 {% block form %}
-<form action="{{ url_for('admin.artists') }}" method="POST">
+<form action="{{ url_for('admin.artists') }}" method="POST" enctype="multipart/form-data">
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             <div class="alert-message block-message error">
@@ -36,5 +36,26 @@
 {% endblock %}
 {% block listname %}Artists{% endblock %}
 {% block list %}
-
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>name</th>
+            <th>about</th>
+            <th>image</th>
+            <th>birth date</th>
+            <th>age</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for artist in artists %}
+            <tr>
+                <th>{{ artist.id }}</th>
+                <td>{{ artist.name }}</td>
+                <td>{{ artist.about|truncate(100) }}</td>
+                <td>{{ artist.image }}</td>
+                <td>{{ artist.birth_date }}</td>
+                <td>{{ artist.age }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
 {% endblock %}
